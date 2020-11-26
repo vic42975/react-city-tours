@@ -1,0 +1,102 @@
+// Button that increments a counter
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+
+function Counter() {
+	const [counter, setCounter] = useState(5); // <- takes in [value, function]
+	// useState sets the state
+	function buttonWasClicked() {
+		setCounter(counter + 1); // this function can be called anything as long as it reflects what's above
+	}
+
+	return (
+		<div>
+			<button onClick={buttonWasClicked}>Button</button>
+			<p>Counter: {counter}</p>
+		</div>
+	);
+}
+
+// input text field where it updates and then console log what you typed
+// also has conditional rendering
+function ControllerSample() {
+	// useState variables
+	const [name, setName] = useState('');
+	const [password, setPassword] = useState('');
+
+	// event handling, what onChange event is happening
+	function handleChange(event) {
+		const target = event.target;
+		target.type == 'text' ? setName(event.target.value) : setPassword(event.target.value);
+	}
+
+	// console log submit
+
+	// conditionally render when name + password = admin
+	function submitForm() {
+		console.log(name, password);
+	}
+	return (
+		<div>
+			<span>{name === 'admin' && password === 'admin' && 'Hello admin'}</span>
+			<input type="text" value={name} onChange={handleChange} />
+			<br />
+			<input type="password" value={password} onChange={handleChange} />
+			<button onClick={submitForm}>Submit Form</button>
+		</div>
+	);
+}
+
+// array for myList
+const myListArray = [
+	{
+		name: 'Victor',
+		id: 1,
+	},
+	{
+		name: 'April',
+		id: 2,
+	},
+];
+
+// displays the array as a list
+function myArrayFunction() {
+	return (
+		<div>
+			<ul>
+				{myListArray.map((elem) => (
+					<li key={elem.id}>
+						{elem.id} - {elem.name} - {elem.id}
+					</li>
+				))}
+			</ul>
+		</div>
+	);
+}
+
+// import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+// write functions for each path
+// also sutff for useParams and Link
+function Home() {
+	return <h1>Home</h1>;
+}
+
+function About() {
+	return <h1>About</h1>;
+}
+
+// routing example, must include the Router-DOM libraries
+function RoutingExample() {
+	return (
+		<Router>
+			<Switch>
+				<Route path="/" exact component={Home} />
+				<Route path="/about" exact component={About} />
+			</Switch>
+		</Router>
+	);
+}
+
+function Notes() {
+	return <p>These are all notes</p>;
+}
